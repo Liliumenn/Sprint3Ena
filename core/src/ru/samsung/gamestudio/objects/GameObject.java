@@ -1,12 +1,13 @@
-package ru.samsung.gamestudio;
+package ru.samsung.gamestudio.objects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 
 import static ru.samsung.gamestudio.GameSettings.SCALE;
 
 public class GameObject {
-    Body body;
+    public Body body;
     public int width;
     public int height;
     Texture texture;
@@ -27,7 +28,7 @@ public class GameObject {
         Body body = world.createBody(def);
 
         CircleShape circleShape = new CircleShape();
-     
+
         circleShape.setRadius(Math.max(width, height) * SCALE / 2f);
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -55,5 +56,9 @@ public class GameObject {
 
     public void setY(int y) {
         body.setTransform(body.getPosition().x, y * SCALE, 0);
+    }
+
+    public void draw(SpriteBatch batch) {
+        batch.draw(texture, getX() - (width / 2f), getY() - (height / 2f), width, height);
     }
 }
