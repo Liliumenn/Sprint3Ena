@@ -2,10 +2,14 @@ package ru.samsung.gamestudio;
 
 import com.badlogic.gdx.utils.TimeUtils;
 
+
 public class GameSession {
 
     long nextTrashSpawnTime;
     long sessionStartTime;
+
+    public GameSession() {
+    }
 
     public void startGame() {
         sessionStartTime = TimeUtils.millis();
@@ -23,6 +27,6 @@ public class GameSession {
     }
 
     private float getTrashPeriodCoolDown() {
-        return (float) Math.exp(-0.001 * (TimeUtils.millis() - sessionStartTime) / 1000);
+        return (float) Math.exp(-0.001 * (TimeUtils.millis() - sessionStartTime + 1) / 1000);
     }
 }
