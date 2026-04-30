@@ -29,6 +29,7 @@ public class AudioManager {
     }
 
     public void updateMusicFlag() {
+        isMusicOn = MemoryManager.loadIsSoundOn();
         if (isMusicOn) backgroundMusic.play();
         else backgroundMusic.stop();
     }
