@@ -31,6 +31,12 @@ public class ButtonView extends View {
         textY = y + (height + textHeight) / 2;
     }
 
+    public ButtonView(float x, float y, float width, float height, String texturePath) {
+        super(x, y, width, height);
+
+        texture  = new Texture(texturePath);
+    }
+
     @Override
     public void draw(SpriteBatch batch) {
         batch.draw(texture, x, y, width, height);

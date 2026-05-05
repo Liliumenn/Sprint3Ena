@@ -16,10 +16,12 @@ public class ImageView extends View {
 
     @Override
     public void draw(SpriteBatch batch) {
-        batch.draw(texture,x,y,width,height);
+        batch.draw(texture, x, y, width, height);
     }
+
     @Override
-    public void dispose(){
+    public void dispose() {
         texture.dispose();
     }
+
 }
