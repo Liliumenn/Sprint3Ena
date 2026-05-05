@@ -2,7 +2,6 @@ package ru.samsung.gamestudio.components;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.samsung.gamestudio.GameSettings;
 
 import java.util.ArrayList;

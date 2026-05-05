@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class GameSession {
 
+    public static int ScoreX = 0;
     public GameState state;
     long nextTrashSpawnTime;
     long sessionStartTime;
@@ -57,6 +58,11 @@ public class GameSession {
 
     public void updateScore() {
         score = (int) (TimeUtils.millis() - sessionStartTime) / 100 + destructedTrashNumber * 100;
+    }
+
+    public void ulimateScore() {
+
+
     }
 
     public int getScore() {

@@ -2,6 +2,7 @@ package ru.samsung.gamestudio.objects;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import ru.samsung.gamestudio.GameSession;
 import ru.samsung.gamestudio.GameSettings;
 
 import java.util.Random;

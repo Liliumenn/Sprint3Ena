@@ -45,5 +45,4 @@ public class MemoryManager {
         ArrayList<Integer> table = json.fromJson(ArrayList.class, scores);
         return table;
     }
-
 }

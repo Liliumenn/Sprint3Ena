@@ -39,7 +39,6 @@ public class GameObject {
     }
 
     public void hit() {
-        // all physics objects could be hit
     }
 
     public int getX() {

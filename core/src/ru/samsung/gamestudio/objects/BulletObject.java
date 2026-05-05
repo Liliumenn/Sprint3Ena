@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import ru.samsung.gamestudio.GameSettings;
 
 public class BulletObject extends GameObject {
-
     public boolean wasHit;
 
     public BulletObject(int x, int y, int width, int height, String texturePath, World world) {
@@ -14,11 +13,9 @@ public class BulletObject extends GameObject {
         body.setBullet(true);
         wasHit = false;
     }
-
     public boolean hasToBeDestroyed() {
         return wasHit || (getY() - height / 2 > GameSettings.SCREEN_HEIGHT);
     }
-
     @Override
     public void hit() {
         wasHit = true;

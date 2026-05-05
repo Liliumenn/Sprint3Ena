@@ -25,21 +25,15 @@ public class GameScreen extends ScreenAdapter {
     ArrayList<BulletObject> bulletArray;
 
     ContactManager contactManager;
-
-    // PLAY state UI
     MovingBackgroundView backgroundView;
     ImageView topBlackoutView;
     LiveView liveView;
     TextView scoreTextView;
     ButtonView pauseButton;
-
-    // PAUSED state UI
     ImageView fullBlackoutView;
     TextView pauseTextView;
     ButtonView homeButton;
     ButtonView continueButton;
-
-    // ENDED state UI
     TextView recordsTextView;
     RecordsListView recordsListView;
     ButtonView homeButton2;
