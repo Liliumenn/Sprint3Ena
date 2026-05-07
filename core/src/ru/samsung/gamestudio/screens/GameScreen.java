@@ -9,6 +9,7 @@ import ru.samsung.gamestudio.*;
 import ru.samsung.gamestudio.components.*;
 import ru.samsung.gamestudio.managers.ContactManager;
 import ru.samsung.gamestudio.managers.MemoryManager;
+import ru.samsung.gamestudio.objects.Boss;
 import ru.samsung.gamestudio.objects.BulletObject;
 import ru.samsung.gamestudio.objects.ShipObject;
 import ru.samsung.gamestudio.objects.TrashObject;
@@ -110,7 +111,23 @@ public class GameScreen extends ScreenAdapter {
                         GameResources.TRASH_IMG_PATH,
                         myGdxGame.world
                 );
+
                 trashArray.add(trashObject);
+            }
+            if (gameSession.shouldSpawnBoss()) {
+                Boss boss = new Boss(
+                        GameSettings.BOSS_WIDTH, GameSettings.BOSS_HEIGHT,
+                        GameResources.TRASH_IMG_PATH,
+                        myGdxGame.world);}
+
+            if (Boss.IsBossKilled()) {
+                BulletObject laserBullet = new BulletObject(
+                        shipObject.getY() + shipObject.height / 2, shipObject.getX(),
+                        GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                        GameResources.BULLET_IMG_PATH,
+                        myGdxGame.world);
+                bulletArray.add(laserBullet);
+                if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
             }
 
             if (shipObject.needToShoot()) {
@@ -118,8 +135,7 @@ public class GameScreen extends ScreenAdapter {
                         shipObject.getX(), shipObject.getY() + shipObject.height / 2,
                         GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
                         GameResources.BULLET_IMG_PATH,
-                        myGdxGame.world
-                );
+                        myGdxGame.world);
                 bulletArray.add(laserBullet);
                 if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
             }
