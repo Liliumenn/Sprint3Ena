@@ -5,15 +5,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import ru.samsung.gamestudio.GameSettings;
 
 
-public class Boss extends GameObject{
+public class Boss extends GameObject {
+    public boolean isKilled;
+    private int livesLeft;
 
-    public static boolean IsBossKilled;
-    private static int livesLeft;
-
-    public Boss (int width, int height, String texturePath, World world) {
+    public Boss(int width, int height, String texturePath, World world) {
         super(
                 texturePath,
-                GameSettings.SCREEN_WIDTH + width / 2,
+                (GameSettings.SCREEN_WIDTH + width) / 2,
                 GameSettings.SCREEN_HEIGHT + height / 2,
                 width, height,
                 GameSettings.TRASH_BIT,
@@ -21,17 +20,11 @@ public class Boss extends GameObject{
         );
 
         body.setLinearVelocity(new Vector2(0, -GameSettings.TRASH_VELOCITY));
-        livesLeft = 5;
+        livesLeft = 3;
     }
 
     public boolean isAlive() {
         return livesLeft > 0;
-    }
-
-    public static boolean IsBossKilled(){
-        if (livesLeft <= 0) {
-        return true; }
-        return false;
     }
 
     public boolean isInFrame() {
@@ -41,5 +34,12 @@ public class Boss extends GameObject{
     @Override
     public void hit() {
         livesLeft -= 1;
+    }
+
+    public void destroyIfNeed(World world) {
+        if(!isKilled){
+            isKilled = livesLeft <= 0;
+            world.destroyBody(body);
+        }
     }
 }

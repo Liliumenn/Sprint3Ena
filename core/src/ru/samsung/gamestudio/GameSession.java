@@ -13,6 +13,7 @@ public class GameSession {
     long pauseStartTime;
     private int score;
     int destructedTrashNumber;
+    int lvl = 0;
 
     public GameSession() {
     }
@@ -58,6 +59,9 @@ public class GameSession {
     public void updateScore() {
         score = (int) (TimeUtils.millis() - sessionStartTime) / 100 + destructedTrashNumber * 100;
     }
+    public void upLvl(){
+        lvl++;
+    }
 
     public int getScore() {
         return score;
@@ -73,12 +77,16 @@ public class GameSession {
     }
 
     public boolean shouldSpawnBoss() {
-        if (score > 100) {
+        if (score > 10) {
             return true; }
         return false;
     }
 
     private float getTrashPeriodCoolDown() {
         return (float) Math.exp(-0.001 * (TimeUtils.millis() - sessionStartTime + 1) / 1000);
+    }
+
+    public int getLvl() {
+        return lvl;
     }
 }

@@ -9,8 +9,8 @@ public class GameSettings {
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 6;
     public static final float SCALE = 0.05f;
-    public static final int BOSS_WIDTH = 200;
-    public static final int BOSS_HEIGHT = 140;
+    public static final int BOSS_WIDTH = 300;
+    public static final int BOSS_HEIGHT = 300;
     public static float SHIP_FORCE_RATIO = 10;
     public static float TRASH_VELOCITY = 20;
     public static long STARTING_TRASH_APPEARANCE_COOL_DOWN = 2000;

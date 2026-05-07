@@ -23,6 +23,7 @@ public class GameScreen extends ScreenAdapter {
     ShipObject shipObject;
 
     ArrayList<TrashObject> trashArray;
+    Boss boss;
     ArrayList<BulletObject> bulletArray;
 
     ContactManager contactManager;
@@ -114,30 +115,20 @@ public class GameScreen extends ScreenAdapter {
 
                 trashArray.add(trashObject);
             }
-            if (gameSession.shouldSpawnBoss()) {
-                Boss boss = new Boss(
+            if (gameSession.getLvl() == 0 && gameSession.shouldSpawnBoss()) {
+                boss = new Boss(
                         GameSettings.BOSS_WIDTH, GameSettings.BOSS_HEIGHT,
                         GameResources.TRASH_IMG_PATH,
-                        myGdxGame.world);}
-
-            if (Boss.IsBossKilled()) {
-                BulletObject laserBullet = new BulletObject(
-                        shipObject.getY() + shipObject.height / 2, shipObject.getX(),
-                        GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
-                        GameResources.BULLET_IMG_PATH,
                         myGdxGame.world);
-                bulletArray.add(laserBullet);
-                if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
+                gameSession.upLvl();
             }
 
+
             if (shipObject.needToShoot()) {
-                BulletObject laserBullet = new BulletObject(
-                        shipObject.getX(), shipObject.getY() + shipObject.height / 2,
-                        GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
-                        GameResources.BULLET_IMG_PATH,
-                        myGdxGame.world);
-                bulletArray.add(laserBullet);
-                if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
+                shoot();
+            }
+            if (boss != null && boss.isKilled) {
+                shoot();
             }
 
             if (!shipObject.isAlive()) {
@@ -146,6 +137,7 @@ public class GameScreen extends ScreenAdapter {
             }
 
             updateTrash();
+            spawnBoss();
             updateBullets();
             backgroundView.move();
             gameSession.updateScore();
@@ -156,6 +148,16 @@ public class GameScreen extends ScreenAdapter {
         }
 
         draw();
+    }
+
+    private void shoot() {
+        BulletObject laserBullet = new BulletObject(
+                shipObject.getX(), shipObject.getY() + shipObject.height / 2,
+                GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                GameResources.BULLET_IMG_PATH,
+                myGdxGame.world);
+        bulletArray.add(laserBullet);
+        if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.shootSound.play();
     }
 
     private void handleInput() {
@@ -201,6 +203,7 @@ public class GameScreen extends ScreenAdapter {
         for (TrashObject trash : trashArray) trash.draw(myGdxGame.batch);
         shipObject.draw(myGdxGame.batch);
         for (BulletObject bullet : bulletArray) bullet.draw(myGdxGame.batch);
+        if (boss != null) boss.draw(myGdxGame.batch);
         topBlackoutView.draw(myGdxGame.batch);
         scoreTextView.draw(myGdxGame.batch);
         liveView.draw(myGdxGame.batch);
@@ -227,6 +230,7 @@ public class GameScreen extends ScreenAdapter {
 
             boolean hasToBeDestroyed = !trashArray.get(i).isAlive() || !trashArray.get(i).isInFrame();
 
+
             if (!trashArray.get(i).isAlive()) {
                 gameSession.destructionRegistration();
                 if (myGdxGame.audioManager.isSoundOn) myGdxGame.audioManager.explosionSound.play(0.2f);
@@ -236,6 +240,17 @@ public class GameScreen extends ScreenAdapter {
                 myGdxGame.world.destroyBody(trashArray.get(i).body);
                 trashArray.remove(i--);
             }
+
+        }
+    }
+
+    private void spawnBoss() {
+        if (boss == null) {
+            return;
+        }
+        boolean bossHasToBeDestroyed = !boss.isAlive() || !boss.isInFrame();
+        if (bossHasToBeDestroyed) {
+            boss.destroyIfNeed(myGdxGame.world);
         }
     }
 

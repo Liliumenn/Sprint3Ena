@@ -9,17 +9,16 @@ public class BulletObject extends GameObject {
 
     public BulletObject(int x, int y, int width, int height, String texturePath, World world) {
         super(texturePath, x, y, width, height, GameSettings.BULLET_BIT, world);
-            if (Boss.IsBossKilled = true) {
-            body.setLinearVelocity(new Vector2(GameSettings.BULLET_VELOCITY, GameSettings.BULLET_VELOCITY));
-             } else {
-            body.setLinearVelocity(new Vector2(GameSettings.BULLET_VELOCITY, GameSettings.BULLET_VELOCITY));}
+        body.setLinearVelocity(new Vector2(GameSettings.BULLET_VELOCITY, GameSettings.BULLET_VELOCITY));
         body.setLinearVelocity(new Vector2(0, GameSettings.BULLET_VELOCITY));
         body.setBullet(true);
         wasHit = false;
     }
+
     public boolean hasToBeDestroyed() {
         return wasHit || (getY() - height / 2 > GameSettings.SCREEN_HEIGHT);
     }
+
     @Override
     public void hit() {
         wasHit = true;
