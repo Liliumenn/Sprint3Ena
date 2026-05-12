@@ -12,7 +12,7 @@ public class Boss extends GameObject {
     public Boss(int width, int height, String texturePath, World world) {
         super(
                 texturePath,
-                (GameSettings.SCREEN_WIDTH + width) / 2,
+                (GameSettings.SCREEN_WIDTH + width) / 3,
                 GameSettings.SCREEN_HEIGHT + height / 2,
                 width, height,
                 GameSettings.TRASH_BIT,

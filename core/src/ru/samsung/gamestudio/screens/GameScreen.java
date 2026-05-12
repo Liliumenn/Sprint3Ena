@@ -118,7 +118,7 @@ public class GameScreen extends ScreenAdapter {
             if (gameSession.getLvl() == 0 && gameSession.shouldSpawnBoss()) {
                 boss = new Boss(
                         GameSettings.BOSS_WIDTH, GameSettings.BOSS_HEIGHT,
-                        GameResources.TRASH_IMG_PATH,
+                        GameResources.BOSS_IMG_PATH,
                         myGdxGame.world);
                 gameSession.upLvl();
             }
@@ -137,7 +137,7 @@ public class GameScreen extends ScreenAdapter {
             }
 
             updateTrash();
-            spawnBoss();
+            updateBoss();
             updateBullets();
             backgroundView.move();
             gameSession.updateScore();
@@ -203,7 +203,7 @@ public class GameScreen extends ScreenAdapter {
         for (TrashObject trash : trashArray) trash.draw(myGdxGame.batch);
         shipObject.draw(myGdxGame.batch);
         for (BulletObject bullet : bulletArray) bullet.draw(myGdxGame.batch);
-        if (boss != null) boss.draw(myGdxGame.batch);
+        if (boss != null && !boss.isKilled) boss.draw(myGdxGame.batch);
         topBlackoutView.draw(myGdxGame.batch);
         scoreTextView.draw(myGdxGame.batch);
         liveView.draw(myGdxGame.batch);
@@ -244,7 +244,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void spawnBoss() {
+    private void updateBoss() {
         if (boss == null) {
             return;
         }

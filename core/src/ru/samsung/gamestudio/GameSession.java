@@ -77,7 +77,7 @@ public class GameSession {
     }
 
     public boolean shouldSpawnBoss() {
-        if (score > 10) {
+        if (score > 1000) {
             return true; }
         return false;
     }
